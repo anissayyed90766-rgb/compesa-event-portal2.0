@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: compesa-event-intelligence
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips="*"
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: COMPESA_SECRET
+        generateValue: true
+      - key: COMPESA_DEV_RESET
+        value: "false"
+      # --- permanent data (REQUIRED on Render free): any Postgres URL, e.g. from neon.tech
+      - key: DATABASE_URL
+        sync: false
+      # --- e-mail over HTTPS (works on the free plan, SMTP ports are blocked there)
+      - key: GMAIL_CLIENT_ID
+        sync: false
+      - key: GMAIL_CLIENT_SECRET
+        sync: false
+      - key: GMAIL_REFRESH_TOKEN
+        sync: false
+      - key: GMAIL_SENDER
+        sync: false
+      - key: COMPESA_PUBLIC_URL
+        sync: false

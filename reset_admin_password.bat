@@ -1,0 +1,19 @@
+@echo off
+setlocal
+cd /d "%~dp0"
+where py >nul 2>nul
+if errorlevel 1 (
+  echo Python launcher ^(py^) not found. Install Python 3.11+ and try again.
+  pause
+  exit /b 1
+)
+if not exist .venv\Scripts\python.exe py -m venv .venv
+set PY=.venv\Scripts\python.exe
+echo Installing / checking dependencies...
+%PY% -m pip install --disable-pip-version-check -q -r requirements.txt
+echo.
+echo ================================================
+echo   COMPESA - RESET AN ACCOUNT PASSWORD
+echo ================================================
+echo.
+%PY% reset_admin_password.py

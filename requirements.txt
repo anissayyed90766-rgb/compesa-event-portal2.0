@@ -1,0 +1,8 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+qrcode[pil]==8.0
+reportlab==4.2.5
+python-dotenv==1.0.1
+opencv-python-headless==4.10.0.84
+psycopg[binary]>=3.2.10,<4
